@@ -24,7 +24,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      # - uses: jakejarvis/s3-sync-action@master
       - uses: unfor19/install-aws-cli-action@v1.0.3
       - name: Copy to S3    
         run: aws s3 sync ./build/. s3://www.elasticsi-project-bucket
