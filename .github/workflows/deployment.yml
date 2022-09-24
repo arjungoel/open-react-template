@@ -25,6 +25,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Copy to S3    
+        uses: jakejarvis/s3-sync-action@master
         run: aws s3 sync ./build/. s3://www.elasticsi-project-bucket
       # - name: Invalidating CloudFront Cache
       #   run: aws cloudfront create-invalidation --distribution-id E2N9QTCYXOBN35 --paths "/*"
