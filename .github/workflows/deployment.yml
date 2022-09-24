@@ -6,12 +6,13 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux, x64, gpu]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
       - name: Install dependencies
-        shell: bash
         run: npm install
       # - name: Build Website
       #   run: npm run build
