@@ -26,7 +26,7 @@ jobs:
           aws-region: us-east-1
       # - uses: ItsKarma/aws-cli@v1.70.0
       #   with: 
-      - uses: aws s3 sync ./build/. s3://www.elasticsi-project-bucket
+      - run: aws s3 sync ./build/. s3://www.elasticsi-project-bucket
       # - name: Copy to S3    
       #   run: aws --version |
       - name: Invalidating CloudFront Cache
