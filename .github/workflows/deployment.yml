@@ -24,10 +24,8 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      # - uses: ItsKarma/aws-cli@v1.70.0
-      #   with: 
+      - name: Install aws cli
+        uses: isbang/setup-awscli@v0.1.0
       - run: aws s3 sync ./build/. s3://www.elasticsi-project-bucket
-      # - name: Copy to S3    
-      #   run: aws --version |
       - name: Invalidating CloudFront Cache
         run: aws cloudfront create-invalidation --distribution-id E2ZEAE6OM42MO5 --paths "/*"
