@@ -28,7 +28,7 @@ jobs:
         pip install awscli
     - name: Login to ECR
       id: ecr
-      uses: elgohr/ecr-login-action@v2
+      uses: jwalton/gh-ecr-login@v1
       with:
         access_key: ${{ secrets.AWS_ACCESS_KEY }}
         secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
