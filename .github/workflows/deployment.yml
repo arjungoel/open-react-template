@@ -35,8 +35,14 @@ jobs:
     needs: start-runner # required to start the main job when the runner is ready
     runs-on: ${{ needs.start-runner.outputs.label }} 
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
       - name: Install NPM Packages
-        run: npm run build
+        run: npm install
       - name: Build Website
         run: npm run build 
       - name: Copy the build folder to S3 bucket
