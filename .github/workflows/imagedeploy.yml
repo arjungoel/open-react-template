@@ -1,4 +1,4 @@
-name: ECR Image tagging update with every new push
+name: "ECR Image tagging update with every new push GitHub Actions"
 
 on:
   push:
