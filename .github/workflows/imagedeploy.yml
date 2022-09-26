@@ -11,19 +11,13 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-    - name: Extract all keywords from package.json
-      uses: sergeysova/jq-action@v2
-      id: keywords
-      with:
-        cmd: 'jq .keywords[] package.json -r'
-        multiline: true
     - name: Install python
       uses: actions/setup-python@v2
       with:
