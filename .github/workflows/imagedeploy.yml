@@ -18,25 +18,37 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-
-    - name: Login to Amazon ECR Private
-      id: login-ecr-private
+    - name: Login to Amazon ECR
+      id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-      with:
-        registry-type: private
-    - name: Automatic Tagging of Releases
-      id: increment-git-tag
-      run: |
-        bash ./script/git_update.sh -v major
-    - name: Build, Tag, and Push the Image to Amazon ECR
-      id: build-image
+
+    - name: Build, tag, and push docker image to Amazon ECR
       env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: backend
-        IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        REPOSITORY: my-ecr-repo
+        IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+    # - name: Login to Amazon ECR Private
+    #   id: login-ecr-private
+    #   uses: aws-actions/amazon-ecr-login@v1
+    #   with:
+    #     registry-type: private
+    # - name: Automatic Tagging of Releases
+    #   id: increment-git-tag
+    #   run: |
+    #     bash ./script/git_update.sh -v major
+    # - name: Build, Tag, and Push the Image to Amazon ECR
+    #   id: build-image
+    #   env:
+    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+    #     ECR_REPOSITORY: backend
+    #     IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+    #   run: |
+    #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+    #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
     # - name: Build, tag, and push image to Amazon ECR
     #   env:
     #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
