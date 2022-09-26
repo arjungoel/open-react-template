@@ -30,8 +30,8 @@ jobs:
       id: ecr
       uses: jwalton/gh-ecr-login@v1
       with:
-        access_key: ${{ secrets.AWS_ACCESS_KEY }}
-        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         region: us-east-1
     - name: Build, tag, and push docker image to Amazon ECR
       env:
