@@ -35,4 +35,4 @@ jobs:
       - name: Copy the build folder to S3 bucket
         run: aws s3 sync ./build/. s3://www.elasticsi-project-bucket
       - name: Invalidating CloudFront Cache
-        run: aws cloudfront create-invalidation --distribution-id E2ZEAE6OM42MO5 --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id E2OUY338AD11Y3 --paths "/*"
