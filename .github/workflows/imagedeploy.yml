@@ -26,7 +26,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install awscli
-    - uses: docker/setup-qemu-action@v2
+    - uses: docker-practice/actions-setup-docker@master
+    - run: |
+        set -x
+
+        docker version
+  #  - uses: docker/setup-qemu-action@v2
     - name: Login to ECR
       id: ecr
       uses: jwalton/gh-ecr-login@v1
